@@ -20,4 +20,7 @@ mongoose
     app.listen(process.env.port, () => {
       console.log('Server started!');
     });
+  })
+  .catch((error) => {
+    console.log(error);
   });
