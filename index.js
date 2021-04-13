@@ -6,8 +6,6 @@ const routes = require('./routes');
 dotenv.config();
 const { user, passwd, dbhost, dbname } = process.env;
 
-console.log(user, passwd, dbhost, dbname);
-
 mongoose
   .connect(`mongodb+srv://${user}:${passwd}@${dbhost}/${dbname}`, {
     useNewUrlParser: true,
@@ -15,6 +13,7 @@ mongoose
   })
   .then(() => {
     const app = express();
+    app.use(express.json());
 
     app.use('/api', routes);
 
