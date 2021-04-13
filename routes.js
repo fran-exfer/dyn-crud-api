@@ -6,8 +6,13 @@ const router = express.Router();
 
 // Get all users
 router.get('/users', async (req, res) => {
-  const users = await User.find();
-  res.send(users);
+  try {
+    const users = await User.find();
+    res.send(users);
+  } catch (error) {
+    res.status(500);
+    res.send(error);
+  }
 });
 
 // Get a specific user
