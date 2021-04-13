@@ -3,7 +3,13 @@ const express = require('express');
 const dotenv = require('dotenv');
 const routes = require('./routes');
 
-dotenv.config();
+/*
+ * Only use dotenv if the enviroment variables are not already set.
+ * This causes conflict with Heroku.
+ */
+if (!process.env.user) {
+  dotenv.config();
+}
 const { user, passwd, dbhost, dbname } = process.env;
 
 mongoose
