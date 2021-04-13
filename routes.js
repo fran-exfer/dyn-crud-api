@@ -40,4 +40,23 @@ router.post('/users', async (req, res) => {
   }
 });
 
+// Update a user
+router.put('/users/:id', async (req, res) => {
+  try {
+    const user = await User.findOne({ _id: req.params.id });
+
+    user.username = req.body.username;
+    user.fullname = req.body.fullname;
+    user.email = req.body.email;
+    user.address = req.body.address;
+    user.status = req.body.status;
+
+    await user.save();
+    res.send(user);
+  } catch {
+    res.status(404);
+    res.send({ error: "User doesn't exist!" });
+  }
+});
+
 module.exports = router;
