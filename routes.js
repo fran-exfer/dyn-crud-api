@@ -20,9 +20,9 @@ router.get('/users/:id', async (req, res) => {
   try {
     const user = await User.findOne({ _id: req.params.id });
     res.send(user);
-  } catch (error) {
+  } catch {
     res.status(404);
-    res.send(error);
+    res.send({ error: "This user doesn't exist! " });
   }
 });
 
@@ -69,9 +69,9 @@ router.delete('/users/:id', async (req, res) => {
   try {
     await User.deleteOne({ _id: req.params.id });
     res.status(204).send();
-  } catch (error) {
+  } catch {
     res.status(404);
-    res.send(error);
+    res.send({ error: "This user doesn't exist! " });
   }
 });
 
