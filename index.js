@@ -3,6 +3,8 @@ const express = require('express');
 const dotenv = require('dotenv');
 const routes = require('./routes');
 
+console.log(process.env.dbhost);
+
 /*
  * Only use dotenv if the enviroment variables are not already set.
  * This causes conflict with Heroku.
