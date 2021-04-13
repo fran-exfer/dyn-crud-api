@@ -1,27 +1,27 @@
 const { request } = require('express');
 const express = require('express');
-const Order = require('./models/Order');
+const User = require('./models/User');
 
 const router = express.Router();
 
-// Get all orders
-router.get('/orders', async (req, res) => {
-  const posts = await Order.find();
-  res.send(posts);
+// Get all users
+router.get('/users', async (req, res) => {
+  const users = await User.find();
+  res.send(users);
 });
 
-// Post a new order
-router.post('/orders', async (req, res) => {
-  const order = new Order({
-    orderId: req.body.orderId,
-    country: req.body.country,
-    shipDate: new Date(req.body.shipDate),
-    companyName: req.body.companyName,
+// Post a new user
+router.post('/users', async (req, res) => {
+  const user = new User({
+    username: req.body.username,
+    fullname: req.body.fullname,
+    email: req.body.email,
+    address: req.body.address,
+    registrationDate: req.body.registrationDate,
     status: req.body.status,
-    type: req.body.type,
   });
-  await order.save();
-  res.send(order);
+  await user.save();
+  res.send(user);
 });
 
 module.exports = router;
