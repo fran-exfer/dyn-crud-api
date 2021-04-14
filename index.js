@@ -15,6 +15,7 @@ mongoose
     const app = express();
     app.use(express.json());
 
+    app.use(cors()); // Use CORS middleware
     app.options('*', cors()); // Allow CORS for all routes
 
     app.use('/api', routes);
