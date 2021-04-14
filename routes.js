@@ -17,7 +17,7 @@ router.get('/users', async (req, res) => {
 });
 
 // Get a specific user
-router.get('/users/:id', async (req, res) => {
+router.get('/users/:id', cors(), async (req, res) => {
   try {
     const user = await User.findOne({ _id: req.params.id });
     res.send(user);
@@ -47,8 +47,8 @@ router.post('/users', async (req, res) => {
 });
 
 // Update a user
-app.options('/products/:id', cors());
-router.put('/users/:id', async (req, res) => {
+app.options('/users/:id', cors());
+router.put('/users/:id', cors(), async (req, res) => {
   try {
     const user = await User.findOne({ _id: req.params.id });
 
@@ -67,7 +67,8 @@ router.put('/users/:id', async (req, res) => {
 });
 
 // Delete a user
-router.delete('/users/:id', async (req, res) => {
+app.options('/users/:id', cors());
+router.delete('/users/:id', cors(), async (req, res) => {
   try {
     await User.deleteOne({ _id: req.params.id });
     res.status(204).send();
