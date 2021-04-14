@@ -6,8 +6,7 @@ const User = require('./models/User');
 const router = express.Router();
 
 // Get all users
-app.options('/users', cors());
-router.get('/users', cors(), async (req, res) => {
+router.get('/users', async (req, res) => {
   try {
     const users = await User.find();
     res.send(users);
@@ -18,19 +17,17 @@ router.get('/users', cors(), async (req, res) => {
 });
 
 // Get a specific user
-app.options('/users/:id', cors());
-router.get('/users/:id', cors(), async (req, res) => {
+router.get('/users/:id', async (req, res) => {
   try {
     const user = await User.findOne({ _id: req.params.id });
     res.send(user);
   } catch {
     res.status(404);
-    res.send({ error: "This user doesn't exist! " });
+    res.send({ error: "This user doesn't exist!" });
   }
 });
 
 // Post a new user
-app.options('/users', cors());
 router.post('/users', async (req, res) => {
   try {
     const user = new User({
@@ -50,8 +47,7 @@ router.post('/users', async (req, res) => {
 });
 
 // Update a user
-app.options('/users/:id', cors());
-router.put('/users/:id', cors(), async (req, res) => {
+router.put('/users/:id', async (req, res) => {
   try {
     const user = await User.findOne({ _id: req.params.id });
 
@@ -70,14 +66,13 @@ router.put('/users/:id', cors(), async (req, res) => {
 });
 
 // Delete a user
-app.options('/users/:id', cors());
-router.delete('/users/:id', cors(), async (req, res) => {
+router.delete('/users/:id', async (req, res) => {
   try {
     await User.deleteOne({ _id: req.params.id });
     res.status(204).send();
   } catch {
     res.status(404);
-    res.send({ error: "This user doesn't exist! " });
+    res.send({ error: "This user doesn't exist!" });
   }
 });
 

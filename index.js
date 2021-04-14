@@ -15,6 +15,8 @@ mongoose
     const app = express();
     app.use(express.json());
 
+    app.options('*', cors()); // Allow CORS for all routes
+
     app.use('/api', routes);
 
     app.listen(process.env.PORT || 5000, () => {
