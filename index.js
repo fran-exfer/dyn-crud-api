@@ -13,18 +13,15 @@ mongoose
   })
   .then(() => {
     const app = express();
+
+    // Allow CORS requests for all routes
+    app.use(cors());
+    app.options('*', cors());
+
+    // Parse body as a JSON
     app.use(express.json());
 
-    //app.use(cors()); // Use CORS middleware
-
-    // Allow CORS
-    app.use((req, res, next) => {
-      res.header('Access-Control-Allow-Origin', '*');
-      res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-      res.header('Access-Control-Allow-Headers', 'Content-Type');
-      next();
-    });
-
+    // Load routes
     app.use('/api', routes);
 
     app.listen(process.env.PORT || 5000, () => {
