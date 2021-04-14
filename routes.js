@@ -29,6 +29,8 @@ router.get('/users/:id', async (req, res) => {
 // Post a new user
 router.post('/users', async (req, res) => {
   try {
+    res.header('Access-Control-Allow-Origin', '*');
+
     const user = new User({
       username: req.body.username,
       fullname: req.body.fullname,
@@ -48,6 +50,8 @@ router.post('/users', async (req, res) => {
 // Update a user
 router.put('/users/:id', async (req, res) => {
   try {
+    res.header('Access-Control-Allow-Origin', '*');
+
     const user = await User.findOne({ _id: req.params.id });
 
     user.username = req.body.username;
@@ -67,6 +71,8 @@ router.put('/users/:id', async (req, res) => {
 // Delete a user
 router.delete('/users/:id', async (req, res) => {
   try {
+    res.header('Access-Control-Allow-Origin', '*');
+
     await User.deleteOne({ _id: req.params.id });
     res.status(204).send();
   } catch {
