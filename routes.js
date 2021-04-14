@@ -6,7 +6,8 @@ const User = require('./models/User');
 const router = express.Router();
 
 // Get all users
-router.get('/users', async (req, res) => {
+app.options('/users', cors());
+router.get('/users', cors(), async (req, res) => {
   try {
     const users = await User.find();
     res.send(users);
@@ -17,6 +18,7 @@ router.get('/users', async (req, res) => {
 });
 
 // Get a specific user
+app.options('/users/:id', cors());
 router.get('/users/:id', cors(), async (req, res) => {
   try {
     const user = await User.findOne({ _id: req.params.id });
@@ -28,6 +30,7 @@ router.get('/users/:id', cors(), async (req, res) => {
 });
 
 // Post a new user
+app.options('/users', cors());
 router.post('/users', async (req, res) => {
   try {
     const user = new User({
